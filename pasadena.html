@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>Document</title>
+                <link rel="stylesheet"  type="text/css" href="bootstrap.css">
+            <link rel="stylesheet" type="text/css" href="weather.css">
+            </head>
+<body>
+        <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  <h1>Weather Dashboard Two Day Forcast</h1>
+                </nav>
+              </div>
+        <div class="container">
+                <div class="row">
+                        <div class="w-100"></div>
+                  <div class="col"><nav class="navbar navbar-light bg-light" width=50px>
+                        <form class="form-inline" width="50px">
+                          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                      </nav>
+                      <nav class="nav flex-column">
+                          <a class="nav-link active" href="index.html">Whittier</a>
+                          <a class="nav-link" href="losAngeles.html">Los Angeles</a>
+                          <a class="nav-link" href="#">Pasadena</a>
+                        </nav> </div>
+                  <div class="col">    <div class="card">
+                        <div class="card-body">
+                                <div class="city"></div>
+                                <div class="wind"></div>
+                                <div class="humidity"></div>
+                                <div class="temp"></div>
+                                <!-- <div class="weather"></div> -->
+                                <div class="description"></div>
+                        </div>
+                      </div></div>
+                  <div class="w-100"></div>
+                  <div class="col">  &nbsp;&nbsp;  </div>
+                  <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                              <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                                <div class="card-header">10/3/2019</div>
+                                <div class="card-body">
+                                  <h5 class="card-title"> Temp 81&deg;F</h5>
+                                  <p class="card-text">Wind Speed: 7 mph<br>
+                                        Humidity: 33%</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div></div>
+                </div>
+              </div> 
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+              <script type="text/javascript">
+                // This is our API key
+                var APIKey = "3d529d015381ae4719bfd91979160bd3";
+            
+                // Here we are building the URL we need to query the database
+                var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+                  "q=pasadena,US&units=imperial&appid=" + APIKey;
+            
+                // Here we run our AJAX call to the OpenWeatherMap API
+                $.ajax({
+                  url: queryURL,
+                  method: "GET"
+                })
+                  // We store all of the retrieved data inside of an object called "response"
+                  .then(function(response) {
+            
+                    // Log the queryURL
+                    console.log(queryURL);
+            
+                    // Log the resulting object
+                    console.log(response);
+            
+                    // Transfer content to HTML
+                    $(".city").html("<h2>" + response.name);
+                    $(".wind").text("Wind Speed: " + response.wind.speed);
+                    $(".humidity").text("Humidity: " + response.main.humidity);
+                    $(".temp").text("Temperature (F) " + response.main.temp);
+                    $(".weather").text("Weather " + response.weather[0].icon);
+                    $(".description").text("Decription " + response.weather[0].description);
+                    $(".type").text("Weather " + response.weather[0].id);
+                    $(".overall").text("Visibility" + response.weather[0].main);
+            
+                    // Log the data in the console as well
+                    console.log("Wind Speed: " + response.wind.speed);
+                    console.log("Humidity: " + response.main.humidity);
+                    console.log("Temperature (F): " + response.main.temp);
+                    console.log("Weather " + response.weather[0].icon);
+                    console.log("Decription  " + response.weather[0].description);
+                    console.log("Weather " + response.weather[0].id);
+                    console.log("Visibility " + response.weather[0].main);
+            
+                    
+                  });
+              </script>
+</body>
+</html>
